@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0a1415">
+  <title>AirBridge 轻投 · 无线工作台</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <svg class="icon-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="i-screen" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8m-4-4v4"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V3m-5 5 5-5 5 5M4 16v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v13m-5-5 5 5 5-5M4 16v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/></symbol>
+    <symbol id="i-fullscreen" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m8 0h5v-5"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 4 12 8-12 8Z"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 6h4l2-3h4l2 3h4a1 1 0 0 1 1 1v13H3V7a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13" r="4"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 8a8 8 0 1 0 0 8M20 3v5h-5"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M10 18h4M10 5h4"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H5v20h14V7Zm0 0v6h5M8 12h8m-8 4h6"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="m12 2 8 3v6c0 6-8 11-8 11S4 17 4 11V5Z"/><path d="m8 11 3 3 5-5"/></symbol>
+    <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M2 8a16 16 0 0 1 20 0M5 12a11 11 0 0 1 14 0m-11 4a6 6 0 0 1 8 0"/><circle cx="12" cy="20" r=".6"/></symbol>
+  </defs></svg>
+
+  <div class="pair-screen" id="pair-screen">
+    <div class="pair-orbit orbit-one"></div><div class="pair-orbit orbit-two"></div>
+    <main class="pair-card" aria-labelledby="pair-heading">
+      <div class="brand"><span class="brand-mark"><i></i><i></i></span><span>AirBridge <b>轻投</b></span></div>
+      <div class="pair-visual" aria-hidden="true"><svg class="icon"><use href="#i-phone"/></svg><span></span><span></span><span></span><svg class="icon"><use href="#i-screen"/></svg></div>
+      <p class="eyebrow">YOUR PHONE. A BIGGER CANVAS.</p>
+      <h1 id="pair-heading">小屏幕，<br>大一点的可能。</h1>
+      <p class="pair-description">将手机桌面带到浏览器，<br>也让文件在两个屏幕之间自由来往。</p>
+      <form id="pair-form">
+        <label for="pair-code">输入手机上显示的 6 位配对码</label>
+        <input id="pair-code" name="code" type="text" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" minlength="6" autocomplete="off" placeholder="000000" required aria-describedby="pair-error">
+        <p id="pair-error" class="form-error" role="alert"></p>
+        <button class="button primary pair-submit" id="pair-submit" type="submit"><span>连接我的手机</span><svg class="icon"><use href="#i-arrow"/></svg></button>
+      </form>
+      <div class="pair-footnote"><svg class="icon"><use href="#i-wifi"/></svg><span>同一 Wi-Fi 或手机热点 · 无需账号</span></div>
+    </main>
+    <span class="pair-corner">AIRBRIDGE / LOCAL CONNECTION</span>
+  </div>
+
+  <div class="workspace" id="workspace" inert aria-hidden="true">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="AirBridge 轻投首页"><span class="brand-mark"><i></i><i></i></span><span>AirBridge <b>轻投</b></span></a>
+      <div class="connection"><span class="status-dot" id="connection-dot"></span><span id="connection-label">正在连接</span><span class="host-label" id="host-label"></span></div>
+      <button class="text-button" id="logout-button" type="button">断开连接 <span aria-hidden="true">↗</span></button>
+    </header>
+    <main class="main-content">
+      <section class="page-intro">
+        <div><p class="eyebrow">WIRELESS WORKSPACE</p><h1>让屏幕，自由延伸<span>。</span></h1><p class="intro-subtitle">桌面同步，文件互传。就在你的局域网里。</p></div>
+        <div class="device-chip"><span class="device-icon"><svg class="icon"><use href="#i-phone"/></svg></span><div><small>已配对设备</small><strong id="device-name">Android 设备</strong></div></div>
+      </section>
+      <div class="workspace-grid">
+        <section class="screen-panel" aria-labelledby="screen-heading">
+          <div class="panel-heading"><div class="section-title"><span class="section-number">01</span><h2 id="screen-heading">实时屏幕</h2></div><span class="live-badge" id="live-badge">等待画面</span></div>
+          <div class="screen-stage" id="screen-stage">
+            <div class="stage-grid" aria-hidden="true"></div>
+            <img id="screen-image" alt="手机实时投屏画面" hidden>
+            <div class="stage-message" id="stage-message"><span class="stage-message-icon"><svg class="icon"><use href="#i-screen"/></svg></span><h3 id="stage-title">等待手机画面</h3><p id="stage-description">在手机上点击“开始投屏”，并允许共享屏幕。</p><button class="button secondary" id="retry-button" type="button" hidden><svg class="icon"><use href="#i-refresh"/></svg>重新连接</button></div>
+            <div class="stage-caption" id="stage-caption" hidden><span></span>实时投屏</div>
+          </div>
+          <div class="screen-toolbar"><div class="screen-spec"><span id="resolution-label">— × —</span><span class="spec-divider"></span><span id="fps-label">等待投屏</span></div><div class="screen-actions"><button class="icon-button" id="pause-button" title="暂停观看" aria-label="暂停观看" type="button" disabled><svg class="icon"><use id="pause-icon" href="#i-pause"/></svg></button><button class="icon-button" id="snapshot-button" title="保存截图" aria-label="保存截图" type="button" disabled><svg class="icon"><use href="#i-camera"/></svg></button><button class="icon-button" id="fullscreen-button" title="全屏观看" aria-label="全屏观看" type="button"><svg class="icon"><use href="#i-fullscreen"/></svg></button></div></div>
+          <p class="screen-note"><svg class="icon"><use href="#i-shield"/></svg>仅在本地网络传输 · 不上传云端<span>画面投屏 / 无音频</span></p>
+        </section>
+
+        <aside class="transfer-panel" aria-labelledby="transfer-heading">
+          <div class="panel-heading"><div class="section-title"><span class="section-number">02</span><h2 id="transfer-heading">文件中转站</h2></div><span class="small-tag">双向传输</span></div>
+          <div class="transfer-content">
+            <div class="direction-label"><span>浏览器</span><svg class="icon"><use href="#i-arrow"/></svg><span>手机</span></div>
+            <label class="drop-zone" id="drop-zone" for="file-input" tabindex="0" role="button" aria-label="选择发送到手机的文件"><span class="upload-icon"><svg class="icon"><use href="#i-upload"/></svg></span><strong>拖入文件，轻松送达</strong><span>或 <u>点击选择文件</u></span><small id="upload-limit">单个文件最大 1 GB</small></label>
+            <input id="file-input" type="file" multiple hidden>
+            <div class="upload-list" id="upload-list" aria-live="polite"></div>
+            <p class="transfer-hint">收到的文件可在手机 App 内查看、另存。</p>
+            <div class="file-section-heading"><div><div class="direction-label"><span>共享文件</span><span class="file-count" id="file-count">0</span></div><p>手机选中的文件，以及浏览器已发送的文件</p></div><button class="icon-button" id="refresh-files" title="刷新文件列表" aria-label="刷新文件列表" type="button"><svg class="icon"><use href="#i-refresh"/></svg></button></div>
+            <div class="file-list" id="file-list"><div class="files-empty"><svg class="icon"><use href="#i-file"/></svg><p>还没有共享文件</p><small>在手机上选择文件，即可在这里下载</small></div></div>
+            <p id="files-error" class="form-error" role="alert"></p>
+          </div>
+        </aside>
+      </div>
+      <footer class="page-footer"><span>两个屏幕，一处默契。</span><span>AIRBRIDGE <i>·</i> LOCAL FIRST</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" hidden></div>
+</body>
+</html>
